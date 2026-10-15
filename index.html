@@ -2,202 +2,286 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Comodidad Diaria</title>
-<meta name="description" content="Guía de distribuidor independiente: a quién ofrecer cada producto, mensajes listos para WhatsApp y lista de clientes.">
-<style>
-:root{
-  --bg:#faf7f2; --card:#ffffff; --ink:#1f2933; --muted:#5b6670; --line:#e6e0d6;
-  --accent:#c2410c; --accent-soft:#fdeee4; --ok:#15803d; --ok-soft:#e7f6ec; --warn:#a16207; --warn-soft:#fdf6dc;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#15181c; --card:#1e2228; --ink:#eef1f4; --muted:#a3adb7; --line:#2f353d;
-    --accent:#fb923c; --accent-soft:#3a2516; --ok:#4ade80; --ok-soft:#163222; --warn:#facc15; --warn-soft:#3a3214;
-  }
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-header{padding:32px 16px 20px;text-align:center}
-header h1{margin:0 0 6px;font-size:clamp(1.6rem,5vw,2.4rem)}
-header p{margin:0 auto;max-width:620px;color:var(--muted)}
-.badge{display:inline-block;margin-bottom:10px;padding:3px 10px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-size:.8rem;font-weight:600}
-nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;padding:8px 16px}
-nav button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:99px;font:inherit;font-size:.92rem;cursor:pointer}
-nav button.on{background:var(--accent);border-color:var(--accent);color:#fff}
-main{max-width:900px;margin:0 auto;padding:20px 16px 60px}
-section{display:none} section.on{display:block}
-h2{font-size:1.35rem;margin:6px 0 14px}
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
-.card h3{margin:0 0 8px;font-size:1.1rem}
-.card ul{margin:6px 0 0;padding-left:20px}
-.lbl{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-top:10px}
-.msg{white-space:pre-wrap;background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:12px;margin:10px 0}
-.btn{border:0;background:var(--accent);color:#fff;padding:9px 14px;border-radius:10px;font:inherit;font-size:.92rem;cursor:pointer}
-.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.do{background:var(--ok-soft);border-color:transparent}
-.dont{background:var(--warn-soft);border-color:transparent}
-.key{font-size:1.25rem;font-weight:700;text-align:center;padding:22px;background:var(--accent-soft);border-radius:14px;color:var(--accent);margin:18px 0}
-ol.steps{padding-left:22px} ol.steps li{margin-bottom:10px}
-form{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
-input,select,textarea{font:inherit;padding:9px 10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);width:100%}
-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:.93rem}
-th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}
-th{color:var(--muted);font-size:.8rem;text-transform:uppercase}
-.tablewrap{overflow-x:auto}
-.empty{color:var(--muted);text-align:center;padding:20px}
-.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;opacity:0;transition:.2s;pointer-events:none}
-.toast.on{opacity:1}
-footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 30px}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comodidad Diaria · Plantillas, rodilleras y brazaletes E-Energy</title>
+<meta name="description" content="Plantillas, rodilleras y brazaletes E-Energy by Nipponflex para tu comodidad diaria. Descubre cuál es para ti con el asistente inteligente y escríbeme por WhatsApp.">
+<meta name="keywords" content="E-Energy, Nipponflex, plantillas, rodilleras, brazaletes, comodidad, enfermeras, meseros, adultos mayores, bienestar">
+<meta name="author" content="Distribuidor independiente E-Energy">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://comodidad-diaria.onrender.com/">
+<meta name="theme-color" content="#2a1036">
+<meta name="color-scheme" content="light dark">
+<meta name="format-detection" content="telephone=no">
+
+<!-- Iconos -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Comodidad">
+
+<!-- Redes sociales (Open Graph / WhatsApp / Facebook) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:site_name" content="Comodidad Diaria">
+<meta property="og:url" content="https://comodidad-diaria.onrender.com/">
+<meta property="og:title" content="Comodidad para tu día a día ✨">
+<meta property="og:description" content="Plantillas, rodilleras y brazaletes E-Energy. Descubre cuál es para ti en 30 segundos.">
+<meta property="og:image" content="https://comodidad-diaria.onrender.com/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Señora sonriendo con una plantilla E-Energy en la mano">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Comodidad para tu día a día ✨">
+<meta name="twitter:description" content="Plantillas, rodilleras y brazaletes E-Energy. Descubre cuál es para ti en 30 segundos.">
+<meta name="twitter:image" content="https://comodidad-diaria.onrender.com/img/og-image.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="/img/hero.jpg">
+<link rel="stylesheet" href="/styles.css">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Comodidad Diaria","url":"https://comodidad-diaria.onrender.com/","inLanguage":"es","description":"Guía de distribuidor independiente de productos E-Energy by Nipponflex: plantillas, rodilleras y brazaletes para la comodidad diaria."}
+</script>
 </head>
 <body>
-<header>
-  <span class="badge">Guía de distribuidor independiente</span>
-  <h1>Comodidad para tu día a día</h1>
-  <p>A quién ofrecer cada producto E-Energy by Nipponflex, mensajes listos para compartir y una lista para dar seguimiento a tus clientes.</p>
+<a class="skip" href="#main">Saltar al contenido</a>
+<div id="progress" aria-hidden="true"></div>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio"><img src="/favicon.svg" alt="" width="34" height="34">Comodidad Diaria</a>
+    <nav class="menu" aria-label="Principal">
+      <a href="#productos">Productos</a>
+      <a href="#asistente">Asistente ✨</a>
+      <a href="#mensajes">Mensajes</a>
+      <a href="#plan">Plan</a>
+      <a href="#clientes">Mis clientes</a>
+    </nav>
+  </div>
 </header>
 
-<nav id="tabs">
-  <button data-t="clientes" class="on">👥 ¿A quién?</button>
-  <button data-t="mensajes">📱 Mensajes</button>
-  <button data-t="videos">🎥 Videos</button>
-  <button data-t="pasos">🚀 Plan</button>
-  <button data-t="hablar">💬 Cómo hablar</button>
-  <button data-t="lista">📋 Mis clientes</button>
-</nav>
+<main id="main">
+<!-- HÉROE -->
+<section class="hero" id="inicio">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="wrap">
+    <div>
+      <span class="pill rv"><span class="dot"></span> E-Energy by Nipponflex · Distribuidor independiente</span>
+      <h1 class="rv d1">Comodidad para <span class="gt">tu día a día</span></h1>
+      <p class="lead rv d2">Ideal para <span class="rot" id="rot">enfermeras</span><br>Plantillas, rodilleras y brazaletes para quienes caminan mucho, trabajan de pie o pasan el día sentados.</p>
+      <div class="cta rv d3">
+        <a class="btn btn-main" href="#asistente">✨ ¿Cuál es para mí?</a>
+        <a class="btn btn-glass" href="#productos">Ver productos</a>
+      </div>
+      <div class="trust rv d3"><span>👣 Para todo el día</span><span>💛 Para toda la familia</span><span>🎁 Un gran regalo</span></div>
+    </div>
+    <div class="hero-art rv d2">
+      <div class="photo"><img src="/img/hero.jpg" alt="Señora sonriendo mientras coloca una plantilla E-Energy en su zapato" width="820" height="820" fetchpriority="high"></div>
+      <div class="chip c1"><span>👣</span>Plantillas</div>
+      <div class="chip c2"><span>🦵</span>Rodilleras</div>
+      <div class="chip c3"><span>✨</span>Brazaletes</div>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"></div>
+</section>
 
-<main>
-<section id="clientes" class="on">
-  <h2>Cliente ideal por producto</h2>
-  <div class="grid">
-    <div class="card"><h3>👣 Plantillas</h3>
-      <div class="lbl">Para quién</div><p>Meseros, enfermeras, cocineros, vendedores, guardias, maestros, repartidores y también quien trabaja sentado.</p>
-      <div class="lbl">Dónde encontrarlos</div><p>Restaurantes, hospitales y clínicas, centros comerciales, escuelas, oficinas.</p></div>
-    <div class="card"><h3>🦵 Rodilleras</h3>
-      <div class="lbl">Para quién</div><p>Adultos mayores, deportistas y personas de cualquier edad con molestias de rodilla.</p>
-      <div class="lbl">Dónde encontrarlos</div><p>Grupos de la tercera edad, iglesias, parques, gimnasios, clubes de caminata, Zumba, fútbol.</p></div>
-    <div class="card"><h3>✨ Brazaletes</h3>
-      <div class="lbl">Para quién</div><p>Todo público. Un regalo ideal.</p>
-      <div class="lbl">Dónde encontrarlos</div><p>Familia, amigos, ferias, redes sociales.</p></div>
-    <div class="card"><h3>⚡ E-Energy</h3>
-      <div class="lbl">Para quién</div><p>Personas activas y ocupadas.</p>
-      <div class="lbl">Dónde encontrarlos</div><p>Gimnasios, emprendedores, padres y madres que trabajan.</p></div>
+<div class="marquee" aria-hidden="true"><div>
+  <span>👣 Meseros</span><span>🩺 Enfermeras</span><span>👨‍🍳 Cocineros</span><span>🛍️ Vendedores</span><span>👵 Adultos mayores</span><span>🏃 Deportistas</span><span>💼 Oficina</span><span>🚚 Repartidores</span><span>👩‍🏫 Maestros</span>
+  <span>👣 Meseros</span><span>🩺 Enfermeras</span><span>👨‍🍳 Cocineros</span><span>🛍️ Vendedores</span><span>👵 Adultos mayores</span><span>🏃 Deportistas</span><span>💼 Oficina</span><span>🚚 Repartidores</span><span>👩‍🏫 Maestros</span>
+</div></div>
+
+<!-- CIFRAS -->
+<div class="wrap">
+  <div class="stats">
+    <div class="stat rv"><b data-count="4">0</b><small>productos para tu día</small></div>
+    <div class="stat rv d1"><b data-count="9" data-plus>0</b><small>tipos de trabajo</small></div>
+    <div class="stat rv d2"><b data-count="30" data-suf=" s">0</b><small>para saber cuál es para ti</small></div>
+    <div class="stat rv d3"><b data-count="100">0</b><small>personas en tu lista</small></div>
+  </div>
+</div>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="kicker">Productos</span>
+      <h2>Lo ideal para cada persona</h2>
+      <p>Toca un producto y comparte el mensaje perfecto por WhatsApp.</p>
+    </div>
+    <div class="grid" id="prods"></div>
   </div>
 </section>
 
-<section id="mensajes">
-  <h2>Mensajes para WhatsApp</h2>
-  <p>Cambia <b>[nombre]</b> por el nombre de tu contacto y toca “Copiar” o “Enviar”.</p>
-  <div class="grid" id="msgs"></div>
-</section>
+<!-- ASISTENTE -->
+<section class="ai" id="asistente">
+  <div class="blob b1" style="opacity:.25"></div><div class="blob b2" style="opacity:.25"></div>
+  <div class="wrap" style="position:relative">
+    <div class="head rv">
+      <span class="kicker">Asistente inteligente ✨</span>
+      <h2>Tu ayudante de ventas</h2>
+      <p>Crea mensajes personalizados, descubre el producto ideal para cada persona y responde las dudas de tus clientes.</p>
+    </div>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-p="gen">✍️ Crear mensaje</button>
+      <button role="tab" aria-selected="false" data-p="quiz">🎯 ¿Cuál es para mí?</button>
+      <button role="tab" aria-selected="false" data-p="chat">💬 Responder dudas</button>
+    </div>
 
-<section id="videos">
-  <h2>Ideas de videos cortos</h2>
-  <p>Para TikTok, Reels o estados de WhatsApp. Pide siempre permiso antes de grabar a otra persona.</p>
-  <div class="grid">
-    <div class="card"><h3>1. “Mi jornada de 10 horas de pie”</h3><p>Grábate al empezar y al terminar el día con tus plantillas.</p></div>
-    <div class="card"><h3>2. “Regalo para mi abuelita”</h3><p>Muestra cómo le das las rodilleras a un adulto mayor.</p></div>
-    <div class="card"><h3>3. “3 productos para tu comodidad diaria”</h3><p>Plantillas, rodilleras y brazalete en 30 segundos.</p></div>
-    <div class="card"><h3>4. Testimonios reales</h3><p>Un cliente cuenta en sus propias palabras cómo se siente.</p></div>
+    <div class="panel on glass" id="gen" role="tabpanel">
+      <div class="fields">
+        <label class="f">Nombre<input id="gName" placeholder="Ej. Rosa" autocomplete="off"></label>
+        <label class="f">¿A qué se dedica?<select id="gWho"></select></label>
+        <label class="f">Producto<select id="gProd"></select></label>
+        <label class="f">Tono<select id="gTone"><option value="amable">😊 Amable</option><option value="formal">🤝 Formal</option><option value="alegre">🎉 Alegre</option><option value="corto">⚡ Corto</option></select></label>
+      </div>
+      <button class="btn btn-main" id="gBtn" style="width:100%">✨ Crear mensaje</button>
+      <div class="out" id="gOut" aria-live="polite">Elige las opciones y toca “Crear mensaje”. Cada vez te dará una versión diferente.</div>
+      <div class="row">
+        <button class="btn btn-glass btn-sm" id="gCopy">📋 Copiar</button>
+        <a class="btn btn-wa btn-sm" id="gWa" target="_blank" rel="noopener">📲 Enviar por WhatsApp</a>
+        <button class="btn btn-glass btn-sm" id="gAgain">🔄 Otra versión</button>
+      </div>
+    </div>
+
+    <div class="panel glass" id="quiz" role="tabpanel"></div>
+
+    <div class="panel glass" id="chat" role="tabpanel">
+      <div class="chat" id="chatLog" aria-live="polite"></div>
+      <div class="sugg" id="sugg"></div>
+      <form class="send" id="chatF"><input id="chatIn" placeholder="Escribe lo que te dijo el cliente…" autocomplete="off" aria-label="Duda del cliente"><button class="btn btn-main btn-sm" aria-label="Enviar">➤</button></form>
+    </div>
   </div>
 </section>
 
-<section id="pasos">
-  <h2>Plan para encontrar clientes</h2>
-  <ol class="steps">
-    <li><b>Tu círculo cercano:</b> haz una lista de 100 personas (familia, vecinos, compañeros, iglesia, escuela) y anota su trabajo para saber qué ofrecerles. Usa la pestaña “Mis clientes”.</li>
-    <li><b>Redes sociales:</b> únete a grupos locales de Facebook (enfermeras, meseros, adultos mayores). Aporta valor primero y no publiques solo anuncios.</li>
-    <li><b>WhatsApp:</b> publica un estado diario con tu experiencia y testimonios (con permiso).</li>
-    <li><b>Anuncios con poco presupuesto:</b> segmenta por profesión (enfermería, hostelería), por edad (55+) y por intereses (caminata, bienestar).</li>
-    <li><b>Ve donde está tu gente:</b> pide permiso para hacer demostraciones en clínicas, restaurantes y centros de adultos mayores; participa en ferias y mercados.</li>
-    <li><b>Alianzas:</b> masajistas, entrenadores, tiendas naturistas.</li>
-    <li><b>Pide referidos:</b> “¿Conoces a alguien más que trabaje de pie o tenga molestias en las rodillas?”</li>
-    <li><b>Seguimiento:</b> a la semana, pregunta “¿Cómo te has sentido con tus plantillas?”.</li>
-  </ol>
+<!-- MENSAJES -->
+<section id="mensajes" class="alt">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="kicker">Listos para usar</span>
+      <h2>Mensajes para WhatsApp</h2>
+      <p>Cambia <b>[nombre]</b> por el nombre de tu contacto. Un toque y listo.</p>
+    </div>
+    <div class="grid" id="msgs"></div>
+  </div>
 </section>
 
+<!-- PLAN -->
+<section id="plan">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="kicker">Paso a paso</span>
+      <h2>Plan para encontrar clientes</h2>
+      <p>8 pasos sencillos para llegar a las personas correctas.</p>
+    </div>
+    <div class="timeline" id="steps"></div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section id="videos" class="alt">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="kicker">Redes sociales</span>
+      <h2>Ideas de videos cortos</h2>
+      <p>Para TikTok, Reels y estados. Pide siempre permiso antes de grabar a alguien.</p>
+    </div>
+    <div class="grid">
+      <div class="vid rv"><img src="/img/gente-energia.jpg" alt="" loading="lazy"><div class="play">▶</div><div class="t"><b>“Mi jornada de 10 horas de pie”</b><small>Grábate al empezar y al terminar el día con tus plantillas.</small></div></div>
+      <div class="vid rv d1"><img src="/img/hero.jpg" alt="" loading="lazy"><div class="play">▶</div><div class="t"><b>“Regalo para mi abuelita”</b><small>Muestra cómo le das las rodilleras a un adulto mayor.</small></div></div>
+      <div class="vid rv d2"><img src="/img/gente-amigos.jpg" alt="" loading="lazy"><div class="play">▶</div><div class="t"><b>“3 productos para tu comodidad”</b><small>Plantillas, rodilleras y brazalete en 30 segundos.</small></div></div>
+      <div class="vid rv d3"><img src="/img/gente-pulsera.jpg" alt="" loading="lazy"><div class="play">▶</div><div class="t"><b>Testimonios reales</b><small>Un cliente cuenta con sus propias palabras cómo se siente.</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO HABLAR -->
 <section id="hablar">
-  <h2>Cómo hablar de los productos</h2>
-  <div class="key">“No es medicina, es comodidad para tu día a día.”</div>
-  <div class="grid">
-    <div class="card do"><h3>✅ Sí puedes decir</h3><ul>
-      <li>“Mucha gente dice que se siente más cómoda.”</li>
-      <li>“A mí me gusta cómo me siento usándolas.”</li>
-      <li>“Es un complemento para tu bienestar.”</li>
-      <li>“Sigue las indicaciones de tu médico.”</li></ul></div>
-    <div class="card dont"><h3>⚠️ No digas</h3><ul>
-      <li>Que reemplaza medicamentos.</li>
-      <li>Que cura enfermedades o el dolor.</li>
-      <li>Que sirve en lugar de ir al médico.</li></ul>
-      <p><b>Importante:</b> personas con marcapasos, embarazadas o con aparatos médicos deben consultar a su médico antes de usar productos magnéticos.</p></div>
+  <div class="wrap">
+    <div class="head rv"><span class="kicker">Honestidad = confianza</span><h2>Cómo hablar de los productos</h2></div>
+    <p class="quote rv">“No es medicina, es <span>comodidad para tu día a día</span>.”</p>
+    <div class="dd">
+      <div class="box yes rv"><h3>✅ Sí puedes decir</h3><ul>
+        <li>“Mucha gente dice que se siente más cómoda.”</li>
+        <li>“A mí me gusta cómo me siento usándolas.”</li>
+        <li>“Es un complemento para tu bienestar.”</li>
+        <li>“Sigue las indicaciones de tu médico.”</li></ul></div>
+      <div class="box no rv d1"><h3>⚠️ No digas</h3><ul>
+        <li>Que reemplaza medicamentos.</li>
+        <li>Que cura enfermedades o el dolor.</li>
+        <li>Que sirve en lugar de ir al médico.</li></ul>
+        <p style="margin-top:10px"><b>Importante:</b> si alguien usa marcapasos, está embarazada o usa un aparato médico, debe consultar a su médico antes de usar productos magnéticos.</p></div>
+    </div>
   </div>
 </section>
 
-<section id="lista">
-  <h2>Mis clientes y seguimiento</h2>
-  <p>Se guarda solo en este dispositivo y navegador.</p>
-  <form id="f">
-    <input id="fn" placeholder="Nombre" required>
-    <input id="fj" placeholder="Trabajo (ej. enfermera)">
-    <select id="fp"><option>Plantillas</option><option>Rodilleras</option><option>Brazalete</option><option>E-Energy</option></select>
-    <select id="fe"><option>Por contactar</option><option>Contactado</option><option>Interesado</option><option>Compró</option><option>Seguimiento</option></select>
-    <input id="fx" placeholder="Notas">
-    <button class="btn" type="submit">Agregar</button>
-  </form>
-  <div class="tablewrap"><table><thead><tr><th>Nombre</th><th>Trabajo</th><th>Producto</th><th>Estado</th><th>Notas</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
-  <div class="row" style="margin-top:12px"><button class="btn ghost" id="exp">Descargar lista (CSV)</button></div>
+<!-- CLIENTES -->
+<section id="clientes" class="alt">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="kicker">Tu lista</span>
+      <h2>Mis clientes y seguimiento</h2>
+      <p>Se guarda solo en este celular o computadora. Meta: 100 personas.</p>
+    </div>
+    <div class="crm">
+      <div class="card rv">
+        <form id="cF">
+          <input id="cN" placeholder="Nombre *" required autocomplete="off">
+          <input id="cT" placeholder="Teléfono (opcional)" inputmode="tel" autocomplete="off">
+          <select id="cJ" aria-label="Trabajo"></select>
+          <select id="cP" aria-label="Producto"></select>
+          <input id="cX" placeholder="Notas" autocomplete="off">
+          <button class="btn btn-main">➕ Agregar cliente</button>
+        </form>
+        <p class="goal"><b id="gCount">0</b> de 100 personas · <b id="gSold">0</b> compraron</p>
+        <div class="goalbar"><i id="gBar"></i></div>
+        <div class="row"><button class="btn btn-line btn-sm" id="cExp">⬇️ Descargar lista (CSV)</button></div>
+      </div>
+      <div class="card rv d1">
+        <div class="filters" id="cFil"></div>
+        <div class="cl" id="cList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section>
+  <div class="wrap">
+    <div class="final rv">
+      <h2>¿Lista o listo para empezar?</h2>
+      <p style="opacity:.95;max-width:520px;margin:0 auto 22px">Escribe tu primer mensaje con el asistente y compártelo hoy con 5 personas.</p>
+      <a class="btn btn-glass" href="#asistente">✨ Abrir el asistente</a>
+    </div>
+  </div>
 </section>
 </main>
 
-<footer>Página informativa de un distribuidor independiente. No es un sitio oficial de Nipponflex. Los productos no sustituyen el consejo ni el tratamiento médico.</footer>
-<div class="toast" id="toast"></div>
+<footer>
+  <div class="wrap">
+    <p>Página informativa de un <b>distribuidor independiente</b>. No es un sitio oficial de Nipponflex.</p>
+    <p>Los productos no sustituyen el consejo ni el tratamiento médico.</p>
+    <p>© <span id="yr"></span> Comodidad Diaria</p>
+  </div>
+</footer>
 
-<script>
-const MSGS=[
- {t:"👣 Enfermeras y meseros",p:"Plantillas",m:"¡Hola [nombre]! 😊 Sé que pasas muchas horas de pie en tu trabajo. Yo uso las plantillas de Nipponflex y me encanta lo cómodas que son para mis jornadas largas. ¿Te gustaría probarlas? Te las muestro sin compromiso. 👣"},
- {t:"💼 Trabajo sentado",p:"Plantillas",m:"¡Hola [nombre]! Para quienes pasamos el día sentados en la oficina, estas plantillas son un detalle de comodidad para los pies. ¿Quieres que te cuente más? 🙂"},
- {t:"🦵 Adultos mayores",p:"Rodilleras",m:"¡Hola [nombre]! Pensé en usted 💛 Tengo unas rodilleras de Nipponflex que dan soporte y comodidad al caminar. Muchas personas dicen sentirse más cómodas en sus paseos. ¿Le gustaría verlas?"},
- {t:"✨ Para todos",p:"Brazalete",m:"¡Hola! ✨ Mira este brazalete de Nipponflex, es elegante y cómodo para usarlo todos los días. Es un lindo regalo para ti o para alguien especial. ¿Te mando fotos?"},
- {t:"🔁 Seguimiento",p:"",m:"¡Hola [nombre]! ¿Cómo te has sentido con tu producto esta semana? 😊 Y si conoces a alguien que trabaje de pie o camine mucho, con gusto le muestro también."}
-];
-const $=s=>document.querySelector(s);
-const toast=t=>{const e=$("#toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),1600)};
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+<nav class="bnav" aria-label="Navegación móvil">
+  <a href="#inicio" class="on"><span>🏠</span>Inicio</a>
+  <a href="#productos"><span>🛍️</span>Productos</a>
+  <a href="#asistente"><span>✨</span>Asistente</a>
+  <a href="#mensajes"><span>💬</span>Mensajes</a>
+  <a href="#clientes"><span>📋</span>Clientes</a>
+</nav>
 
-document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{
-  document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x===b));
-  document.querySelectorAll("main section").forEach(s=>s.classList.toggle("on",s.id===b.dataset.t));
-  try{localStorage.setItem("tab",b.dataset.t)}catch(e){}
-});
-try{const t=localStorage.getItem("tab");if(t)document.querySelector(`#tabs button[data-t="${t}"]`)?.click()}catch(e){}
+<a class="fab" id="fab" target="_blank" rel="noopener" aria-label="Escríbeme por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></svg>
+</a>
 
-$("#msgs").innerHTML=MSGS.map((x,i)=>`<div class="card"><h3>${x.t}</h3><div class="msg">${esc(x.m)}</div>
- <div class="row"><button class="btn" data-c="${i}">Copiar</button><a class="btn ghost" style="text-decoration:none" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(x.m)}">Enviar por WhatsApp</a></div></div>`).join("");
-$("#msgs").onclick=e=>{const i=e.target.dataset.c;if(i==null)return;
-  navigator.clipboard?.writeText(MSGS[i].m).then(()=>toast("¡Mensaje copiado!"),()=>toast("No se pudo copiar"))};
-
-let L=[];try{L=JSON.parse(localStorage.getItem("clientes")||"[]")}catch(e){}
-const save=()=>{try{localStorage.setItem("clientes",JSON.stringify(L))}catch(e){}};
-const ESTADOS=["Por contactar","Contactado","Interesado","Compró","Seguimiento"];
-function render(){
-  $("#tb").innerHTML=L.length?L.map((c,i)=>`<tr><td><b>${esc(c.n)}</b></td><td>${esc(c.j)}</td><td>${esc(c.p)}</td>
-   <td><select data-e="${i}">${ESTADOS.map(s=>`<option${s===c.e?" selected":""}>${s}</option>`).join("")}</select></td>
-   <td>${esc(c.x)}</td><td><button class="btn ghost" data-d="${i}" aria-label="Borrar">✕</button></td></tr>`).join("")
-   :`<tr><td colspan="6" class="empty">Aún no hay clientes. ¡Empieza con tu lista de 100 personas!</td></tr>`;
-}
-$("#f").onsubmit=e=>{e.preventDefault();
-  L.push({n:$("#fn").value.trim(),j:$("#fj").value.trim(),p:$("#fp").value,e:$("#fe").value,x:$("#fx").value.trim()});
-  save();render();e.target.reset();$("#fn").focus();toast("Cliente agregado")};
-$("#tb").onchange=e=>{const i=e.target.dataset.e;if(i!=null){L[i].e=e.target.value;save()}};
-$("#tb").onclick=e=>{const i=e.target.dataset.d;if(i!=null&&confirm("¿Borrar a "+L[i].n+"?")){L.splice(i,1);save();render()}};
-$("#exp").onclick=()=>{
-  const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
-  const csv="﻿Nombre,Trabajo,Producto,Estado,Notas\n"+L.map(c=>[c.n,c.j,c.p,c.e,c.x].map(q).join(",")).join("\n");
-  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="mis-clientes.csv";a.click()};
-render();
-</script>
+<div class="toast" id="toast" role="status"></div>
+<script src="/app.js" defer></script>
 </body>
 </html>

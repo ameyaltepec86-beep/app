@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://comodidad-diaria.onrender.com/sitemap.xml
