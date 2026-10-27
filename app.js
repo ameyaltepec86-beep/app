@@ -8,7 +8,15 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const pick = a => a[Math.floor(Math.random() * a.length)];
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const wa = (text, phone = WHATSAPP) => `https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
+// Plantillas HTML seguras: todo valor interpolado se escapa salvo lo que ya viene de html``.
+const raw = s => ({ __html: s });
+const val = v => Array.isArray(v) ? v.map(val).join("") : v && v.__html != null ? v.__html : esc(v ?? "");
+const html = (s, ...v) => raw(s.reduce((a, x, i) => a + x + (i < v.length ? val(v[i]) : ""), ""));
+const setHTML = (el, h) => { el.innerHTML = h.__html; };
+// Límites máximos de lo que escribe el usuario
+const LIM = { name: 60, phone: 20, notes: 200, chat: 200, clients: 1000 };
+const clip = (s, n) => String(s).trim().slice(0, n);
+const wa =(text, phone = WHATSAPP) => `https://wa.me/${phone.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function toast(t) {
@@ -32,8 +40,11 @@ function confetti(n = 60) {
 }
 const store = {
   get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d } catch { return d } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)) } catch {} }
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true } catch { return false } }
 };
+// Error inesperado: aviso amable, sin detalles técnicos para el usuario
+addEventListener("error", () => toast("😕 Algo salió mal. Recarga la página e inténtalo de nuevo."));
+addEventListener("unhandledrejection", () => toast("😕 Algo salió mal. Recarga la página e inténtalo de nuevo."));
 
 /* ---------- Datos ---------- */
 const PRODUCTS = [
@@ -87,30 +98,30 @@ const STEPS = [
 const STATES = ["Por contactar", "Contactado", "Interesado", "Compró", "Seguimiento"];
 
 /* ---------- Productos ---------- */
-$("#prods").innerHTML = PRODUCTS.map((p, i) => `
+setHTML($("#prods"), html`${PRODUCTS.map((p, i) => html`
   <article class="prod rv d${i % 4}">
-    <div class="ph"><img src="${p.img}" alt="${p.name} E-Energy" loading="lazy" width="640" height="640"><span class="tag">${p.tag}</span></div>
+    <div class="ph"><img src="${p.img}" alt="${p.name} E-Energy" loading="lazy" decoding="async" width="640" height="640"><span class="tag">${p.tag}</span></div>
     <div class="bd">
       <h3>${p.emoji} ${p.name}</h3>
-      <div class="who">${p.who.map(w => `<span>${w}</span>`).join("")}</div>
+      <div class="who">${p.who.map(w => html`<span>${w}</span>`)}</div>
       <p class="where">📍 ${p.where}</p>
       <a class="btn btn-line btn-sm" href="#asistente" data-prod="${p.id}">✨ Crear mensaje</a>
     </div>
-  </article>`).join("");
+  </article>`)}`);
 $("#prods").addEventListener("click", e => {
   const b = e.target.closest("[data-prod]"); if (!b) return;
   $("#gProd").value = b.dataset.prod; openTab("gen");
 });
 
 /* ---------- Mensajes listos ---------- */
-$("#msgs").innerHTML = MSGS.map((x, i) => `
-  <div class="msg rv d${i % 3}"><h3>${x.t}</h3><p>${esc(x.m)}</p>
-    <div class="row" style="margin:0"><button class="btn btn-line btn-sm" data-c="${i}">📋 Copiar</button>
-    <a class="btn btn-wa btn-sm" href="${wa(x.m, "")}" target="_blank" rel="noopener">📲 Enviar</a></div></div>`).join("");
+setHTML($("#msgs"), html`${MSGS.map((x, i) => html`
+  <div class="msg rv d${i % 3}"><h3>${x.t}</h3><p>${x.m}</p>
+    <div class="row m0"><button class="btn btn-line btn-sm" data-c="${i}">📋 Copiar</button>
+    <a class="btn btn-wa btn-sm" href="${wa(x.m, "")}" target="_blank" rel="noopener">📲 Enviar</a></div></div>`)}`);
 $("#msgs").addEventListener("click", e => { const b = e.target.closest("[data-c]"); if (b) copy(MSGS[b.dataset.c].m); });
 
 /* ---------- Plan ---------- */
-$("#steps").innerHTML = STEPS.map(([h, p], i) => `<div class="step rv" data-n="${i + 1}"><h3>${h}</h3><p>${p}</p></div>`).join("");
+setHTML($("#steps"), html`${STEPS.map(([h, p], i) => html`<div class="step rv" data-n="${i + 1}"><h3>${h}</h3><p>${p}</p></div>`)}`);
 
 /* ---------- Asistente: pestañas ---------- */
 function openTab(id) {
@@ -120,8 +131,8 @@ function openTab(id) {
 $$(".tabs button").forEach(b => b.addEventListener("click", () => openTab(b.dataset.p)));
 
 /* ---------- Asistente: crear mensaje ---------- */
-$("#gWho").innerHTML = JOBS.map(j => `<option value="${j.id}">${j.label}</option>`).join("");
-$("#gProd").innerHTML = PRODUCTS.map(p => `<option value="${p.id}">${p.emoji} ${p.name}</option>`).join("");
+setHTML($("#gWho"), html`${JOBS.map(j => html`<option value="${j.id}">${j.label}</option>`)}`);
+setHTML($("#gProd"), html`${PRODUCTS.map(p => html`<option value="${p.id}">${p.emoji} ${p.name}</option>`)}`);
 $("#gWho").addEventListener("change", () => { $("#gProd").value = JOBS.find(j => j.id === $("#gWho").value).prod; });
 
 const usted = id => id === "mayor";
@@ -132,7 +143,7 @@ const T = {
 };
 let lastMsg = "";
 function makeMsg() {
-  const n = $("#gName").value.trim() || "[nombre]";
+  const n = clip($("#gName").value, LIM.name) || "[nombre]";
   const job = JOBS.find(j => j.id === $("#gWho").value);
   const p = PRODUCTS.find(x => x.id === $("#gProd").value);
   const tone = $("#gTone").value;
@@ -150,7 +161,7 @@ function makeMsg() {
 function typeOut(el, text) {
   clearInterval(typeOut.t); el.classList.add("typing");
   if (reduced) { el.textContent = text; el.classList.remove("typing"); return; }
-  el.innerHTML = '<span class="thinking"><i></i><i></i><i></i></span>';
+  setHTML(el, html`<span class="thinking"><i></i><i></i><i></i></span>`);
   setTimeout(() => {
     let i = 0; el.textContent = "";
     typeOut.t = setInterval(() => { el.textContent = text.slice(0, i += 2); if (i >= text.length) { clearInterval(typeOut.t); el.classList.remove("typing"); } }, 16);
@@ -173,8 +184,9 @@ function renderQuiz() {
   const box = $("#quiz");
   if (qi < QUIZ.length) {
     const q = QUIZ[qi];
-    box.innerHTML = `<div class="bar"><i style="width:${qi / QUIZ.length * 100}%"></i></div><p style="opacity:.7;font-size:.85rem">Pregunta ${qi + 1} de ${QUIZ.length}</p><p class="q">${q.q}</p>
-      <div class="opts">${q.o.map((o, i) => `<button data-i="${i}">${o[0]}</button>`).join("")}</div>`;
+    setHTML(box, html`<div class="bar"><i></i></div><p class="qn">Pregunta ${qi + 1} de ${QUIZ.length}</p><p class="q">${q.q}</p>
+      <div class="opts">${q.o.map((o, i) => html`<button data-i="${i}">${o[0]}</button>`)}</div>`);
+    $(".bar i", box).style.width = qi / QUIZ.length * 100 + "%";
     $$(".opts button", box).forEach(b => b.addEventListener("click", () => {
       Object.entries(q.o[b.dataset.i][1]).forEach(([k, v]) => score[k] = (score[k] || 0) + v);
       qi++; renderQuiz();
@@ -183,10 +195,10 @@ function renderQuiz() {
     const best = Object.entries(score).sort((a, b) => b[1] - a[1])[0]?.[0] || "plantillas";
     const p = PRODUCTS.find(x => x.id === best);
     const txt = `¡Hola! 😊 Hice el test de Comodidad Diaria y me salió: ${p.name} ${p.emoji}. ¿Me das más información?`;
-    box.innerHTML = `<div class="bar"><i style="width:100%"></i></div><div class="result">
-      <div class="big">${p.emoji}</div><p style="opacity:.8">Tu producto ideal es</p><h3 style="font-size:2rem;margin:4px 0 8px">${p.name}</h3>
-      <p style="opacity:.85;max-width:460px;margin:0 auto">Porque ${p.benefit}. ¡Pregúntame por ${p.name.toLowerCase()} y te lo muestro!</p>
-      <div class="row" style="justify-content:center"><a class="btn btn-wa" target="_blank" rel="noopener" href="${wa(txt)}">📲 Quiero información</a><button class="btn btn-glass" id="qAgain">🔄 Repetir</button></div></div>`;
+    setHTML(box, html`<div class="bar"><i class="full"></i></div><div class="result">
+      <div class="big">${p.emoji}</div><p class="r-k">Tu producto ideal es</p><h3 class="r-h">${p.name}</h3>
+      <p class="r-p">Porque ${p.benefit}. ¡Pregúntame por ${p.name.toLowerCase()} y te lo muestro!</p>
+      <div class="row center"><a class="btn btn-wa" target="_blank" rel="noopener" href="${wa(txt)}">📲 Quiero información</a><button class="btn btn-glass" id="qAgain">🔄 Repetir</button></div></div>`);
     $("#qAgain").addEventListener("click", () => { qi = 0; score = {}; renderQuiz(); });
     confetti();
   }
@@ -219,40 +231,51 @@ function answer(q) {
   const a = hit ? hit.a : "Respuesta sugerida 💬\n“¡Qué buena pregunta! Déjame confirmarlo y te respondo hoy mismo. Mientras, ¿te mando unas fotos de los productos?”\n\nConsejo: escucha con calma, responde con honestidad y nunca prometas curas.";
   const d = bub("", "bot"); typeOut(d, a);
 }
-$("#sugg").innerHTML = SUGG.map(s => `<button type="button">${s}</button>`).join("");
+setHTML($("#sugg"), html`${SUGG.map(s => html`<button type="button">${s}</button>`)}`);
 $("#sugg").addEventListener("click", e => { if (e.target.tagName === "BUTTON") answer(e.target.textContent); });
-$("#chatF").addEventListener("submit", e => { e.preventDefault(); const v = $("#chatIn").value.trim(); if (v) { answer(v); $("#chatIn").value = ""; } });
+$("#chatF").addEventListener("submit", e => { e.preventDefault(); const v = clip($("#chatIn").value, LIM.chat); if (v) { answer(v); $("#chatIn").value = ""; } });
 bub("¡Hola! 👋 Escribe lo que te dijo tu cliente (por ejemplo “está caro”) y te sugiero una respuesta honesta.", "bot");
 
 /* ---------- Mis clientes ---------- */
-let L = store.get("clientes", []).map(c => ({ n: c.n, t: c.t || "", j: c.j || "", p: c.p || "", e: c.e || STATES[0], x: c.x || "" }));
-let filter = "Todos";
-$("#cJ").innerHTML = `<option value="">Trabajo (opcional)</option>` + JOBS.map(j => `<option>${j.label}</option>`).join("");
-$("#cP").innerHTML = PRODUCTS.map(p => `<option>${p.emoji} ${p.name}</option>`).join("");
+// Valida y limpia cada registro (también los que ya estaban guardados)
+const cleanClient = c => c && typeof c === "object" && clip(c.n ?? "", LIM.name) ? {
+  n: clip(c.n, LIM.name), t: String(c.t ?? "").replace(/[^\d+ ()-]/g, "").slice(0, LIM.phone),
+  j: JOBS.some(j => j.label === c.j) ? c.j : "", p: PRODUCTS.some(p => `${p.emoji} ${p.name}` === c.p) ? c.p : "",
+  e: STATES.includes(c.e) ? c.e : STATES[0], x: clip(c.x ?? "", LIM.notes) } : null;
+const saved = store.get("clientes", []);
+let L = (Array.isArray(saved) ? saved : []).map(cleanClient).filter(Boolean).slice(0, LIM.clients);
+let filter = "Todos", warnedSave = false;
+setHTML($("#cJ"), html`<option value="">Trabajo (opcional)</option>${JOBS.map(j => html`<option>${j.label}</option>`)}`);
+setHTML($("#cP"), html`${PRODUCTS.map(p => html`<option>${p.emoji} ${p.name}</option>`)}`);
 function renderCRM() {
-  store.set("clientes", L);
-  $("#cFil").innerHTML = ["Todos", ...STATES].map(s => `<button class="${s === filter ? "on" : ""}">${s} (${s === "Todos" ? L.length : L.filter(c => c.e === s).length})</button>`).join("");
+  if (!store.set("clientes", L) && !warnedSave) { warnedSave = true; toast("⚠️ No se pudo guardar en este navegador (¿modo privado?)"); }
+  setHTML($("#cFil"), html`${["Todos", ...STATES].map(s => html`<button class="${s === filter ? "on" : ""}" data-f="${s}">${s} (${s === "Todos" ? L.length : L.filter(c => c.e === s).length})</button>`)}`);
   const rows = L.map((c, i) => ({ c, i })).filter(({ c }) => filter === "Todos" || c.e === filter);
-  $("#cList").innerHTML = rows.length ? rows.map(({ c, i }) => `
-    <div class="ci"><div class="av">${esc(c.n[0] || "?").toUpperCase()}</div>
-      <div><b>${esc(c.n)}</b><small>${esc([c.j, c.p, c.x].filter(Boolean).join(" · "))}</small><br>
-        <select data-e="${i}" aria-label="Estado">${STATES.map(s => `<option${s === c.e ? " selected" : ""}>${s}</option>`).join("")}</select></div>
-      <div class="acts">${c.t ? `<a class="ic" target="_blank" rel="noopener" aria-label="WhatsApp a ${esc(c.n)}" href="${wa(MSGS[0].m.replace("[nombre]", c.n), c.t)}">📲</a>` : ""}<button class="ic" data-d="${i}" aria-label="Borrar ${esc(c.n)}">🗑️</button></div>
-    </div>`).join("")
-    : `<div class="empty"><div>📝</div>${L.length ? "No hay clientes en este estado." : "Aún no hay clientes. ¡Empieza con tu lista de 100 personas!"}</div>`;
+  setHTML($("#cList"), rows.length ? html`${rows.map(({ c, i }) => html`
+    <div class="ci"><div class="av">${(c.n[0] || "?").toUpperCase()}</div>
+      <div><b>${c.n}</b><small>${[c.j, c.p, c.x].filter(Boolean).join(" · ")}</small><br>
+        <select data-e="${i}" aria-label="Estado de ${c.n}">${STATES.map(s => s === c.e ? html`<option selected>${s}</option>` : html`<option>${s}</option>`)}</select></div>
+      <div class="acts">${c.t.replace(/\D/g, "") ? html`<a class="ic" target="_blank" rel="noopener" aria-label="WhatsApp a ${c.n}" href="${wa(MSGS[0].m.replace("[nombre]", c.n), c.t)}">📲</a>` : ""}<button class="ic" data-d="${i}" aria-label="Borrar ${c.n}">🗑️</button></div>
+    </div>`)}`
+    : html`<div class="empty"><div>📝</div>${L.length ? "No hay clientes en este estado." : "Aún no hay clientes. ¡Empieza con tu lista de 100 personas!"}</div>`);
   $("#gCount").textContent = L.length;
   $("#gSold").textContent = L.filter(c => c.e === "Compró").length;
   $("#gBar").style.width = Math.min(100, L.length) + "%";
 }
 $("#cF").addEventListener("submit", e => {
   e.preventDefault();
-  L.unshift({ n: $("#cN").value.trim(), t: $("#cT").value.trim(), j: $("#cJ").value, p: $("#cP").value, e: STATES[0], x: $("#cX").value.trim() });
+  if (L.length >= LIM.clients) return toast(`Tu lista llegó al máximo de ${LIM.clients} personas`);
+  const t = $("#cT").value.trim(), digits = t.replace(/\D/g, "");
+  if (t && (!/^[\d+ ()-]+$/.test(t) || digits.length < 8 || digits.length > 15)) { $("#cT").focus(); return toast("📞 Revisa el teléfono: de 8 a 15 dígitos"); }
+  const c = cleanClient({ n: $("#cN").value, t, j: $("#cJ").value, p: $("#cP").value, e: STATES[0], x: $("#cX").value });
+  if (!c) { $("#cN").focus(); return toast("Escribe el nombre del cliente"); }
+  L.unshift(c);
   e.target.reset(); renderCRM(); toast("✅ Cliente agregado");
   if ([10, 25, 50, 100].includes(L.length)) { confetti(); toast(`🎉 ¡Ya tienes ${L.length} personas en tu lista!`); }
 });
-$("#cFil").addEventListener("click", e => { if (e.target.tagName === "BUTTON") { filter = e.target.textContent.replace(/ \(\d+\)$/, ""); renderCRM(); } });
+$("#cFil").addEventListener("click", e => { const b = e.target.closest("[data-f]"); if (b) { filter = b.dataset.f; renderCRM(); } });
 $("#cList").addEventListener("change", e => {
-  const i = e.target.dataset.e; if (i == null) return;
+  const i = e.target.dataset.e; if (i == null || !STATES.includes(e.target.value)) return;
   L[i].e = e.target.value; renderCRM();
   if (e.target.value === "Compró") { confetti(); toast("🎉 ¡Felicidades por tu venta!"); }
 });
@@ -262,7 +285,8 @@ $("#cList").addEventListener("click", e => {
 });
 $("#cExp").addEventListener("click", () => {
   if (!L.length) return toast("Tu lista está vacía");
-  const q = v => `"${String(v).replace(/"/g, '""')}"`;
+  // Evita inyección de fórmulas al abrir el CSV en Excel
+  const q = v => `"${String(v).replace(/^[=+\-@\t\r]/, "'$&").replace(/"/g, '""')}"`;
   const csv = "﻿Nombre,Teléfono,Trabajo,Producto,Estado,Notas\n" + L.map(c => [c.n, c.t, c.j, c.p, c.e, c.x].map(q).join(",")).join("\n");
   const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = "mis-clientes.csv"; a.click();
 });
@@ -308,6 +332,7 @@ addEventListener("scroll", onScroll, { passive: true }); onScroll();
 // Botón flotante de WhatsApp
 $("#fab").href = wa("¡Hola! 😊 Vi tu página Comodidad Diaria y quiero información sobre los productos E-Energy.");
 $("#yr").textContent = new Date().getFullYear();
+$("#gWa").href = wa("", "");
 
 // App instalable y sin conexión
 if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("/sw.js").catch(() => {});

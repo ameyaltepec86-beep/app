@@ -1,0 +1,13 @@
+# Secretos: nunca se suben al repositorio
+.env
+.env.*
+!.env.example
+
+# Dependencias y archivos del sistema
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+
+# Herramientas locales
+.claude/

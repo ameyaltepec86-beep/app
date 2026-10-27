@@ -119,41 +119,41 @@
 
 <!-- ASISTENTE -->
 <section class="ai" id="asistente">
-  <div class="blob b1" style="opacity:.25"></div><div class="blob b2" style="opacity:.25"></div>
-  <div class="wrap" style="position:relative">
+  <div class="blob b1 dim"></div><div class="blob b2 dim"></div>
+  <div class="wrap rel">
     <div class="head rv">
       <span class="kicker">Asistente inteligente ✨</span>
       <h2>Tu ayudante de ventas</h2>
       <p>Crea mensajes personalizados, descubre el producto ideal para cada persona y responde las dudas de tus clientes.</p>
     </div>
     <div class="tabs" role="tablist">
-      <button role="tab" aria-selected="true" data-p="gen">✍️ Crear mensaje</button>
-      <button role="tab" aria-selected="false" data-p="quiz">🎯 ¿Cuál es para mí?</button>
-      <button role="tab" aria-selected="false" data-p="chat">💬 Responder dudas</button>
+      <button role="tab" aria-selected="true" aria-controls="gen" data-p="gen">✍️ Crear mensaje</button>
+      <button role="tab" aria-selected="false" aria-controls="quiz" data-p="quiz">🎯 ¿Cuál es para mí?</button>
+      <button role="tab" aria-selected="false" aria-controls="chat" data-p="chat">💬 Responder dudas</button>
     </div>
 
     <div class="panel on glass" id="gen" role="tabpanel">
       <div class="fields">
-        <label class="f">Nombre<input id="gName" placeholder="Ej. Rosa" autocomplete="off"></label>
+        <label class="f">Nombre<input id="gName" placeholder="Ej. Rosa" autocomplete="off" maxlength="60"></label>
         <label class="f">¿A qué se dedica?<select id="gWho"></select></label>
         <label class="f">Producto<select id="gProd"></select></label>
         <label class="f">Tono<select id="gTone"><option value="amable">😊 Amable</option><option value="formal">🤝 Formal</option><option value="alegre">🎉 Alegre</option><option value="corto">⚡ Corto</option></select></label>
       </div>
-      <button class="btn btn-main" id="gBtn" style="width:100%">✨ Crear mensaje</button>
+      <button class="btn btn-main wfull" id="gBtn">✨ Crear mensaje</button>
       <div class="out" id="gOut" aria-live="polite">Elige las opciones y toca “Crear mensaje”. Cada vez te dará una versión diferente.</div>
       <div class="row">
         <button class="btn btn-glass btn-sm" id="gCopy">📋 Copiar</button>
-        <a class="btn btn-wa btn-sm" id="gWa" target="_blank" rel="noopener">📲 Enviar por WhatsApp</a>
+        <a class="btn btn-wa btn-sm" id="gWa" href="https://wa.me/" target="_blank" rel="noopener">📲 Enviar por WhatsApp</a>
         <button class="btn btn-glass btn-sm" id="gAgain">🔄 Otra versión</button>
       </div>
     </div>
 
-    <div class="panel glass" id="quiz" role="tabpanel"></div>
+    <div class="panel glass" id="quiz" role="tabpanel" aria-live="polite"><p class="qn">Cargando preguntas…</p></div>
 
     <div class="panel glass" id="chat" role="tabpanel">
       <div class="chat" id="chatLog" aria-live="polite"></div>
       <div class="sugg" id="sugg"></div>
-      <form class="send" id="chatF"><input id="chatIn" placeholder="Escribe lo que te dijo el cliente…" autocomplete="off" aria-label="Duda del cliente"><button class="btn btn-main btn-sm" aria-label="Enviar">➤</button></form>
+      <form class="send" id="chatF"><input id="chatIn" placeholder="Escribe lo que te dijo el cliente…" autocomplete="off" aria-label="Duda del cliente" maxlength="200" required><button class="btn btn-main btn-sm" aria-label="Enviar">➤</button></form>
     </div>
   </div>
 </section>
@@ -191,10 +191,10 @@
       <p>Para TikTok, Reels y estados. Pide siempre permiso antes de grabar a alguien.</p>
     </div>
     <div class="grid">
-      <div class="vid rv"><img src="/img/gente-energia.jpg" alt="" loading="lazy"><div class="play">▶</div><div class="t"><b>“Mi jornada de 10 horas de pie”</b><small>Grábate al empezar y al terminar el día con tus plantillas.</small></div></div>
-      <div class="vid rv d1"><img src="/img/hero.jpg" alt="" loading="lazy"><div class="play">▶</div><div class="t"><b>“Regalo para mi abuelita”</b><small>Muestra cómo le das las rodilleras a un adulto mayor.</small></div></div>
-      <div class="vid rv d2"><img src="/img/gente-amigos.jpg" alt="" loading="lazy"><div class="play">▶</div><div class="t"><b>“3 productos para tu comodidad”</b><small>Plantillas, rodilleras y brazalete en 30 segundos.</small></div></div>
-      <div class="vid rv d3"><img src="/img/gente-pulsera.jpg" alt="" loading="lazy"><div class="play">▶</div><div class="t"><b>Testimonios reales</b><small>Un cliente cuenta con sus propias palabras cómo se siente.</small></div></div>
+      <div class="vid rv"><img src="/img/gente-energia.jpg" alt="Persona activa durante su jornada" loading="lazy" decoding="async"><div class="play">▶</div><div class="t"><b>“Mi jornada de 10 horas de pie”</b><small>Grábate al empezar y al terminar el día con tus plantillas.</small></div></div>
+      <div class="vid rv d1"><img src="/img/hero.jpg" alt="Señora con una plantilla E-Energy" loading="lazy" decoding="async"><div class="play">▶</div><div class="t"><b>“Regalo para mi abuelita”</b><small>Muestra cómo le das las rodilleras a un adulto mayor.</small></div></div>
+      <div class="vid rv d2"><img src="/img/gente-amigos.jpg" alt="Grupo de amigos sonriendo" loading="lazy" decoding="async"><div class="play">▶</div><div class="t"><b>“3 productos para tu comodidad”</b><small>Plantillas, rodilleras y brazalete en 30 segundos.</small></div></div>
+      <div class="vid rv d3"><img src="/img/gente-pulsera.jpg" alt="Persona usando un brazalete E-Energy" loading="lazy" decoding="async"><div class="play">▶</div><div class="t"><b>Testimonios reales</b><small>Un cliente cuenta con sus propias palabras cómo se siente.</small></div></div>
     </div>
   </div>
 </section>
@@ -214,7 +214,7 @@
         <li>Que reemplaza medicamentos.</li>
         <li>Que cura enfermedades o el dolor.</li>
         <li>Que sirve en lugar de ir al médico.</li></ul>
-        <p style="margin-top:10px"><b>Importante:</b> si alguien usa marcapasos, está embarazada o usa un aparato médico, debe consultar a su médico antes de usar productos magnéticos.</p></div>
+        <p class="mt10"><b>Importante:</b> si alguien usa marcapasos, está embarazada o usa un aparato médico, debe consultar a su médico antes de usar productos magnéticos.</p></div>
     </div>
   </div>
 </section>
@@ -225,16 +225,19 @@
     <div class="head rv">
       <span class="kicker">Tu lista</span>
       <h2>Mis clientes y seguimiento</h2>
-      <p>Se guarda solo en este celular o computadora. Meta: 100 personas.</p>
+      <p>Se guarda solo en este celular o computadora; no se envía a ningún servidor. Meta: 100 personas.</p>
     </div>
     <div class="crm">
       <div class="card rv">
         <form id="cF">
-          <input id="cN" placeholder="Nombre *" required autocomplete="off">
-          <input id="cT" placeholder="Teléfono (opcional)" inputmode="tel" autocomplete="off">
+          <label class="sr" for="cN">Nombre del cliente</label>
+          <input id="cN" placeholder="Nombre *" required autocomplete="off" maxlength="60">
+          <label class="sr" for="cT">Teléfono del cliente</label>
+          <input id="cT" type="tel" placeholder="Teléfono (opcional)" inputmode="tel" autocomplete="off" maxlength="20">
           <select id="cJ" aria-label="Trabajo"></select>
           <select id="cP" aria-label="Producto"></select>
-          <input id="cX" placeholder="Notas" autocomplete="off">
+          <label class="sr" for="cX">Notas</label>
+          <input id="cX" placeholder="Notas" autocomplete="off" maxlength="200">
           <button class="btn btn-main">➕ Agregar cliente</button>
         </form>
         <p class="goal"><b id="gCount">0</b> de 100 personas · <b id="gSold">0</b> compraron</p>
@@ -254,7 +257,7 @@
   <div class="wrap">
     <div class="final rv">
       <h2>¿Lista o listo para empezar?</h2>
-      <p style="opacity:.95;max-width:520px;margin:0 auto 22px">Escribe tu primer mensaje con el asistente y compártelo hoy con 5 personas.</p>
+      <p class="final-p">Escribe tu primer mensaje con el asistente y compártelo hoy con 5 personas.</p>
       <a class="btn btn-glass" href="#asistente">✨ Abrir el asistente</a>
     </div>
   </div>
@@ -265,6 +268,7 @@
   <div class="wrap">
     <p>Página informativa de un <b>distribuidor independiente</b>. No es un sitio oficial de Nipponflex.</p>
     <p>Los productos no sustituyen el consejo ni el tratamiento médico.</p>
+    <p><a href="/privacidad.html">Aviso de privacidad y términos de uso</a></p>
     <p>© <span id="yr"></span> Comodidad Diaria</p>
   </div>
 </footer>
