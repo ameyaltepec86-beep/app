@@ -2,7 +2,7 @@
 
 Guía web para distribuidores independientes de productos E-Energy by Nipponflex. Incluye catálogo, asistente de mensajes para WhatsApp, test "¿Cuál es para mí?" y una lista de clientes que se guarda en el propio dispositivo.
 
-Sitio en producción: https://comodidad-diaria.onrender.com/
+Sitio en producción: https://comodidad-diaria-vclc.onrender.com/
 
 ## Cómo está hecho
 
