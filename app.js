@@ -113,6 +113,63 @@ $("#prods").addEventListener("click", e => {
   $("#gProd").value = b.dataset.prod; openTab("gen");
 });
 
+/* ---------- Catálogo E-Energy ---------- */
+// Precios de referencia de e-energyusa.com (oct. 2026), en dólares. Cámbialos por tus precios de venta.
+// mag: lleva imanes (aplica la precaución de marcapasos).
+const CATALOG = [
+  { f: "Agua", n: "Jarra Alcaline Max", img: "jarra-alcaline-max", price: 869.70, tag: "Para toda la familia",
+    d: "Jarra purificadora con filtro de 5 capas: minerales, carbón activado con plata coloidal, esferas alcalinas, carbón activado y cuarzo. Disco con 10 Ion Balls e imán de 3400 Gauss.",
+    b: ["Reduce el cloro y mejora el sabor del agua", "Agua con minerales y pH más alto", "Te ayuda a tomar más agua cada día", "Repuesto de 1000 L o 9 meses: unas 2000 botellas de plástico menos"] },
+  { f: "Agua", n: "Alcaline Squeeze MAX", img: "alcaline-squeeze-max", price: 362, tag: "Para llevar",
+    d: "Botella portátil del sistema Alcaline para el gimnasio, la oficina, la escuela o los viajes.",
+    b: ["Agua a la mano fuera de casa", "Te recuerda hidratarte en jornadas largas", "Ideal después de hacer ejercicio"] },
+  { f: "Cuerpo", n: "Plantillas Blue Insole", img: "plantillas-insole", price: 176, tag: "Más pedido", mag: true,
+    d: "18 imanes en puntos estratégicos y tecnología FIR. Se recortan para adaptarse a tu calzado. Tallas chica, mediana y grande.",
+    b: ["Confort para quienes trabajan de pie", "Menos sensación de cansancio en pies y piernas al final del día", "Para enfermeras, meseros, maestros, cocineros y caminantes"] },
+  { f: "Cuerpo", n: "Rodillera Knee Pad FIR", img: "rodillera-knee-pad", price: 236.90, tag: "Adultos mayores", mag: true,
+    d: "Neopreno y espuma especial con compresión térmica, 4 FIR Power y un imán de 1800 Gauss. Tallas chica, mediana y grande. Garantía de 90 días.",
+    b: ["Soporte y calor en la rodilla al caminar", "Compresión firme pero cómoda", "Para adultos mayores y deportistas"] },
+  { f: "Cuerpo", n: "Rodillera Knee Brace ajustable", img: "rodillera-knee-brace", price: 333.47, tag: "Ajustable", mag: true,
+    d: "Talla única con 3 puntos de ajuste para regular la compresión, con FIR Power y magnetismo.",
+    b: ["Más firme para entrenar, más suave para todo el día", "Se adapta a cada rodilla", "Ideal para caminatas y deporte"] },
+  { f: "Cuerpo", n: "Pulsera FIR ION Black", img: "pulsera-fir-ion", price: 274, tag: "Para regalar",
+    d: "FIR Power e Ion Balls en un diseño que va con ropa deportiva o formal. Tallas S/M, L/XL y XXL.",
+    b: ["Cómoda para usar todo el día", "La forma más sencilla de empezar con E-Energy", "Un regalo elegante"] },
+  { f: "Cuerpo", n: "Pulsera Young FIR Power", img: "pulsera-young", price: 184.43, tag: "Jóvenes",
+    d: "Diseño moderno y ligero de la línea FIR Power, en tallas de la S a la XXL.",
+    b: ["Ligera y con estilo", "Para adolescentes y muñecas pequeñas", "Toda la familia con su pulsera"] },
+  { f: "Cuerpo", n: "Pulsera FIR ION Kids", img: "pulsera-kids", price: 274, tag: "Niños",
+    d: "Para niños, con cierre ajustable de acero quirúrgico sin níquel. Modelos Energy Boy y Energy Girl. Incluye cómic.",
+    b: ["Cierre sin níquel, amable con la piel", "Diseño divertido para ellos", "Úsala siempre con supervisión de un adulto"] },
+  { f: "Descanso", n: "Almohada Hive Dream FIR", img: "almohada-hive-dream", price: 587, tag: "Dormir mejor",
+    d: "Almohada con tecnología FIR pensada para tu descanso.",
+    b: ["Apoyo cómodo para cuello y cabeza", "Parte de una rutina para dormir mejor", "Combínala con el antifaz"] },
+  { f: "Descanso", n: "Super Sleep Mask", img: "super-sleep-mask", price: 137.10, tag: "En casa o de viaje",
+    d: "Antifaz para dormir que bloquea la luz, en casa o de viaje.",
+    b: ["Oscuridad para dormir más profundo", "Ideal para turnos de noche y viajes", "Ligero y fácil de llevar"] },
+  { f: "Descanso", n: "Colchón Nipponflex Triple S Firm", img: "colchon-nipponflex", price: 10394.50, tag: "Premium",
+    d: "Colchón firme de 14 pulgadas. El precio es de la medida Full; las demás medidas cuestan más.",
+    b: ["Soporte firme para tu espalda", "Pensado para descansar toda la noche", "Pregúntame por otras medidas"] }
+];
+const usd = n => "US$ " + n.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+setHTML($("#cat"), html`${CATALOG.map((p, i) => html`
+  <article class="prod rv d${i % 4}" data-f="${p.f}">
+    <div class="ph"><img src="/img/cat/${p.img}.jpg" alt="${p.n} E-Energy" loading="lazy" decoding="async" width="640" height="640"><span class="tag">${p.tag}</span></div>
+    <div class="bd">
+      <h3>${p.n}</h3>
+      <p class="where">${p.d}</p>
+      <ul class="ben">${p.b.map(x => html`<li>${x}</li>`)}</ul>
+      ${p.mag ? html`<p class="warn">⚠️ Tiene imanes: no lo uses si tienes marcapasos u otro aparato médico implantado.</p>` : ""}
+      <p class="price">${usd(p.price)} <small>precio de referencia</small></p>
+      <a class="btn btn-wa btn-sm" href="${wa(`¡Hola! 😊 Me interesa ${p.n} de E-Energy. ¿Me das más información y el precio?`)}" target="_blank" rel="noopener">📲 Lo quiero</a>
+    </div>
+  </article>`)}`);
+$("#catFil").addEventListener("click", e => {
+  const b = e.target.closest("[data-f]"); if (!b) return;
+  $$("#catFil button").forEach(x => x.classList.toggle("on", x === b));
+  $$("#cat .prod").forEach(c => { c.hidden = !!b.dataset.f && c.dataset.f !== b.dataset.f; });
+});
+
 /* ---------- Mensajes listos ---------- */
 setHTML($("#msgs"), html`${MSGS.map((x, i) => html`
   <div class="msg rv d${i % 3}"><h3>${x.t}</h3><p>${x.m}</p>
@@ -318,7 +375,7 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 $$(".rv").forEach(el => io.observe(el));
 
 // Encabezado, barra de progreso y menú inferior activo
-const secs = ["inicio", "productos", "asistente", "mensajes", "clientes"].map(id => document.getElementById(id));
+const secs = ["inicio", "catalogo", "asistente", "mensajes", "clientes"].map(id => document.getElementById(id));
 function onScroll() {
   const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
   $("#progress").style.width = (h > 0 ? y / h * 100 : 0) + "%";

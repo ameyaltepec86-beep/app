@@ -196,6 +196,28 @@ label.f{display:flex;flex-direction:column;gap:6px;font-size:.85rem;font-weight:
 .play{position:absolute;z-index:1;top:16px;right:16px;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.25);backdrop-filter:blur(6px);display:grid;place-items:center;font-size:1.1rem}
 .vid.grad{background:var(--grad)}
 
+/* Catálogo */
+.filters.center{justify-content:center;margin-bottom:24px}
+.prod[hidden]{display:none}
+.ben{padding-left:20px;display:grid;gap:4px;font-size:.92rem}
+.ben li::marker{content:"✓  ";color:var(--g);font-weight:800}
+.warn{font-size:.8rem;color:var(--muted);background:var(--bg2);border-radius:12px;padding:8px 10px}
+.price{font-size:1.25rem;font-weight:800;margin-top:auto}
+.price small{display:block;font-size:.75rem;font-weight:500;color:var(--muted)}
+.note{text-align:center;color:var(--muted);font-size:.85rem;max-width:640px;margin:28px auto 0}
+
+/* Beneficios */
+.mt40{margin-top:56px}
+.pillar{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.pillar img{aspect-ratio:4/3;object-fit:cover;width:100%;height:auto;background:#fff}
+.pillar .bd{padding:20px;display:grid;gap:10px}
+.pillar p{color:var(--muted);font-size:.95rem}
+.pillar ul{padding-left:20px;display:grid;gap:6px;font-size:.92rem}
+.tech{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);display:grid;gap:8px;align-content:start}
+.tech .ti{font-size:2.2rem}
+.tech p{font-size:.92rem}
+.tech .sci{background:var(--bg2);border-radius:12px;padding:10px 12px}
+
 /* Cómo hablar */
 .quote{font-size:clamp(1.4rem,5vw,2.2rem);font-weight:800;text-align:center;max-width:800px;margin:0 auto 36px;line-height:1.25}
 .quote span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
