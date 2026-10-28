@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://comodidad-diaria-vclc.onrender.com/sitemap.xml
+Sitemap: https://comodidad-diaria-n3vw.onrender.com/sitemap.xml
