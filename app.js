@@ -123,7 +123,7 @@ const CATALOG = [
   { f: "Agua", n: "Alcaline Squeeze MAX", img: "alcaline-squeeze-max", price: 362, tag: "Para llevar",
     d: "Botella portátil del sistema Alcaline para el gimnasio, la oficina, la escuela o los viajes.",
     b: ["Agua a la mano fuera de casa", "Te recuerda hidratarte en jornadas largas", "Ideal después de hacer ejercicio"] },
-  { f: "Cuerpo", n: "Plantillas Blue Insole", img: "plantillas-insole", price: 176, tag: "Más pedido", mag: true,
+  { f: "Cuerpo", n: "Plantillas Blue Insole", img: "plantillas-insole", price: 176, tag: "⭐ Más pedido", mag: true, video: true,
     d: "18 imanes en puntos estratégicos y tecnología FIR. Se recortan para adaptarse a tu calzado. Tallas chica, mediana y grande.",
     b: ["Confort para quienes trabajan de pie", "Menos sensación de cansancio en pies y piernas al final del día", "Para enfermeras, meseros, maestros, cocineros y caminantes"] },
   { f: "Cuerpo", n: "Rodillera Knee Pad FIR", img: "rodillera-knee-pad", price: 236.90, tag: "Adultos mayores", mag: true,
@@ -153,7 +153,7 @@ const CATALOG = [
 ];
 const usd = n => "US$ " + n.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 setHTML($("#cat"), html`${CATALOG.map((p, i) => html`
-  <article class="prod rv d${i % 4}" data-f="${p.f}">
+  <article class="prod rv d${i % 4}${p.video ? " star" : ""}" data-f="${p.f}">
     <div class="ph"><img src="/img/cat/${p.img}.jpg" alt="${p.n} E-Energy" loading="lazy" decoding="async" width="640" height="640"><span class="tag">${p.tag}</span></div>
     <div class="bd">
       <h3>${p.n}</h3>
@@ -161,6 +161,7 @@ setHTML($("#cat"), html`${CATALOG.map((p, i) => html`
       <ul class="ben">${p.b.map(x => html`<li>${x}</li>`)}</ul>
       ${p.mag ? html`<p class="warn">⚠️ Tiene imanes: no lo uses si tienes marcapasos u otro aparato médico implantado.</p>` : ""}
       <p class="price">${usd(p.price)} <small>precio de referencia</small></p>
+      ${p.video ? html`<a class="btn btn-line btn-sm" href="#video">▶ Ver video</a>` : ""}
       <a class="btn btn-wa btn-sm" href="${wa(`¡Hola! 😊 Me interesa ${p.n} de E-Energy. ¿Me das más información y el precio?`)}" target="_blank" rel="noopener">📲 Lo quiero</a>
     </div>
   </article>`)}`);
@@ -169,6 +170,19 @@ $("#catFil").addEventListener("click", e => {
   $$("#catFil button").forEach(x => x.classList.toggle("on", x === b));
   $$("#cat .prod").forEach(c => { c.hidden = !!b.dataset.f && c.dataset.f !== b.dataset.f; });
 });
+
+/* ---------- Video ---------- */
+// El reproductor de YouTube solo se carga al tocar el video (la página abre más rápido y sin cookies de YouTube).
+$("#yt").addEventListener("click", e => {
+  const b = e.currentTarget, f = document.createElement("iframe");
+  f.src = `https://www.youtube-nocookie.com/embed/${b.dataset.id}?autoplay=1&rel=0&playsinline=1`;
+  f.title = "Beneficios de las plantillas Insole de E-Energy";
+  f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+  f.allowFullscreen = true;
+  b.replaceWith(f);
+});
+$("#vWa").href = wa("¡Hola! 😊 Vi el video de las plantillas Insole de E-Energy y quiero las mías. ¿Me das información?");
+$("#finWa").href = wa("¡Hola! 😊 Vi tu página y quiero que me ayudes a elegir un producto E-Energy.");
 
 /* ---------- Mensajes listos ---------- */
 setHTML($("#msgs"), html`${MSGS.map((x, i) => html`
@@ -375,12 +389,12 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 $$(".rv").forEach(el => io.observe(el));
 
 // Encabezado, barra de progreso y menú inferior activo
-const secs = ["inicio", "catalogo", "asistente", "mensajes", "clientes"].map(id => document.getElementById(id));
+const secs = ["video", "catalogo", "beneficios", "asistente", "clientes"].map(id => document.getElementById(id));
 function onScroll() {
   const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
   $("#progress").style.width = (h > 0 ? y / h * 100 : 0) + "%";
   $("#top").classList.toggle("solid", y > 40);
-  let cur = "inicio";
+  let cur = "";
   secs.forEach(s => { if (s && s.getBoundingClientRect().top < innerHeight * .4) cur = s.id; });
   $$(".bnav a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + cur));
 }

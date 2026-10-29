@@ -40,7 +40,7 @@ Cada `push` a `main` se publica automáticamente en Render. La configuración vi
 ## Seguridad y calidad
 
 - **Secretos:** ninguna llave en el código; `.env` ignorado por git.
-- **XSS:** todo el HTML dinámico pasa por la plantilla `html``...``, que escapa cada valor. No hay scripts ni estilos en línea, y una **Content Security Policy** estricta solo permite recursos propios y Google Fonts.
+- **XSS:** todo el HTML dinámico pasa por la plantilla `html``...``, que escapa cada valor. No hay scripts ni estilos en línea, y una **Content Security Policy** estricta solo permite recursos propios, Google Fonts y el reproductor de YouTube sin cookies (`youtube-nocookie.com`), que se carga solo al tocar el video.
 - **Encabezados:** HSTS, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy` y `Permissions-Policy` (en `render.yaml`). Render sirve todo por HTTPS.
 - **Validación y límites:** nombre ≤ 60, teléfono de 8 a 15 dígitos, notas ≤ 200, dudas ≤ 200 caracteres y máximo 1000 clientes. Los datos guardados se vuelven a validar al cargar. El CSV exportado está protegido contra inyección de fórmulas.
 - **Errores:** página 404 propia, página 500 sin detalles técnicos y aviso amable si ocurre un error en el navegador o no se puede guardar.

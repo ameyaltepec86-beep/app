@@ -196,7 +196,37 @@ label.f{display:flex;flex-direction:column;gap:6px;font-size:.85rem;font-weight:
 .play{position:absolute;z-index:1;top:16px;right:16px;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.25);backdrop-filter:blur(6px);display:grid;place-items:center;font-size:1.1rem}
 .vid.grad{background:var(--grad)}
 
+/* Video destacado */
+.vsec{position:relative;background:linear-gradient(160deg,#1c0f2b,#2a1036 55%,#3b1252);color:#fff;overflow:hidden}
+.vsec .head p{color:#d8cbe6}
+.vsec .kicker{background:linear-gradient(90deg,#fdba74,#f472b6);-webkit-background-clip:text;background-clip:text}
+.vwrap{display:grid;gap:28px;align-items:center}
+@media (min-width:900px){.vwrap{grid-template-columns:1.5fr 1fr}}
+.vframe{position:relative;border-radius:26px;padding:3px;background:linear-gradient(120deg,#fdba74,#f472b6,#a78bfa,#fdba74);background-size:300% 300%;animation:shift 8s ease infinite;box-shadow:0 30px 70px -20px rgba(219,39,119,.55)}
+.vframe>*{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:23px;overflow:hidden;background:#000}
+.yt{position:relative;padding:0;cursor:pointer}
+.yt img{width:100%;height:100%;object-fit:cover;transition:transform .6s,filter .3s}
+.yt:hover img{transform:scale(1.04);filter:brightness(.85)}
+.yplay{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;box-shadow:0 0 0 0 rgba(244,114,182,.6);animation:pulse 2s infinite}
+.yplay svg{width:38px;height:38px;margin-left:5px}
+.ylabel{position:absolute;left:14px;bottom:14px;background:rgba(20,8,30,.75);backdrop-filter:blur(6px);color:#fff;font-weight:700;font-size:.85rem;padding:6px 12px;border-radius:99px}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(244,114,182,.6)}70%{box-shadow:0 0 0 22px rgba(244,114,182,0)}100%{box-shadow:0 0 0 0 rgba(244,114,182,0)}}
+.vlist{list-style:none;padding:0;display:grid;gap:14px}
+.vlist li{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:14px}
+.vlist li>span{font-size:1.6rem;line-height:1}
+.vlist b{display:block}
+.vlist small{color:#d8cbe6;font-size:.88rem}
+.vsrc{margin-top:14px;font-size:.78rem;color:#b9a9cc}
+.pbtn{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#fff;color:var(--p);font-size:.7rem}
+
+/* Banda zona del distribuidor */
+.band{background:var(--grad);background-size:200% 200%;animation:shift 10s ease infinite;color:#fff;text-align:center;padding:44px 0}
+.band .kicker{background:none;color:#fff;-webkit-text-fill-color:#fff;opacity:.9}
+.band h2{color:#fff;margin:6px 0}
+.band p{opacity:.92;max-width:620px;margin:0 auto}
+
 /* Catálogo */
+.prod.star{border:2px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,var(--grad) border-box;box-shadow:0 24px 50px -18px rgba(219,39,119,.45)}
 .filters.center{justify-content:center;margin-bottom:24px}
 .prod[hidden]{display:none}
 .ben{padding-left:20px;display:grid;gap:4px;font-size:.92rem}
