@@ -123,7 +123,10 @@ const CATALOG = [
   { f: "Agua", n: "Alcaline Squeeze MAX", img: "alcaline-squeeze-max", price: 362, tag: "Para llevar",
     d: "Botella portátil del sistema Alcaline para el gimnasio, la oficina, la escuela o los viajes.",
     b: ["Agua a la mano fuera de casa", "Te recuerda hidratarte en jornadas largas", "Ideal después de hacer ejercicio"] },
-  { f: "Cuerpo", n: "Plantillas Blue Insole", img: "plantillas-insole", price: 176, tag: "⭐ Más pedido", mag: true, video: true,
+  { f: "Cuerpo", n: "Plantillas Insole Biohacking", img: "insole-biohacking", price: null, tag: "🆕 Nuevo", mag: true, video: true,
+    d: "La nueva plantilla de E-Energy: 36 imanes y 10 FIR Power por par, diseño exclusivo con zonas de colores y 3 tamaños ajustables que se recortan a tu medida.",
+    b: ["Confort a cada paso, en tenis o zapatos", "Pensadas para sentir menos presión y cansancio al final del día", "Para el gimnasio, el trabajo de pie o la oficina"] },
+  { f: "Cuerpo", n: "Plantillas Blue Insole", img: "plantillas-insole", price: 176, tag: "Más pedido", mag: true,
     d: "18 imanes en puntos estratégicos y tecnología FIR. Se recortan para adaptarse a tu calzado. Tallas chica, mediana y grande.",
     b: ["Confort para quienes trabajan de pie", "Menos sensación de cansancio en pies y piernas al final del día", "Para enfermeras, meseros, maestros, cocineros y caminantes"] },
   { f: "Cuerpo", n: "Rodillera Knee Pad FIR", img: "rodillera-knee-pad", price: 236.90, tag: "Adultos mayores", mag: true,
@@ -160,8 +163,8 @@ setHTML($("#cat"), html`${CATALOG.map((p, i) => html`
       <p class="where">${p.d}</p>
       <ul class="ben">${p.b.map(x => html`<li>${x}</li>`)}</ul>
       ${p.mag ? html`<p class="warn">⚠️ Tiene imanes: no lo uses si tienes marcapasos u otro aparato médico implantado.</p>` : ""}
-      <p class="price">${usd(p.price)} <small>precio de referencia</small></p>
-      ${p.video ? html`<a class="btn btn-line btn-sm" href="#video">▶ Ver video</a>` : ""}
+      <p class="price">${p.price ? usd(p.price) : "¡Nuevo!"} <small>${p.price ? "precio de referencia" : "pregúntame el precio en tu país"}</small></p>
+      ${p.video ? html`<a class="btn btn-line btn-sm" href="#inicio">▶ Ver video</a>` : ""}
       <a class="btn btn-wa btn-sm" href="${wa(`¡Hola! 😊 Me interesa ${p.n} de E-Energy. ¿Me das más información y el precio?`)}" target="_blank" rel="noopener">📲 Lo quiero</a>
     </div>
   </article>`)}`);
@@ -176,12 +179,15 @@ $("#catFil").addEventListener("click", e => {
 $("#yt").addEventListener("click", e => {
   const b = e.currentTarget, f = document.createElement("iframe");
   f.src = `https://www.youtube-nocookie.com/embed/${b.dataset.id}?autoplay=1&rel=0&playsinline=1`;
-  f.title = "Beneficios de las plantillas Insole de E-Energy";
+  f.title = "Plantillas Insole Biohacking de E-Energy";
   f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
   f.allowFullscreen = true;
+  b.closest(".hero-video")?.classList.add("playing");
   b.replaceWith(f);
 });
-$("#vWa").href = wa("¡Hola! 😊 Vi el video de las plantillas Insole de E-Energy y quiero las mías. ¿Me das información?");
+const bioMsg = "¡Hola! 😊 Vi el video de las plantillas Insole Biohacking de E-Energy y quiero las mías. ¿Me das información y el precio?";
+$("#vWa").href = wa(bioMsg);
+$("#heroWa").href = wa(bioMsg);
 $("#finWa").href = wa("¡Hola! 😊 Vi tu página y quiero que me ayudes a elegir un producto E-Energy.");
 
 /* ---------- Mensajes listos ---------- */
@@ -389,7 +395,7 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 $$(".rv").forEach(el => io.observe(el));
 
 // Encabezado, barra de progreso y menú inferior activo
-const secs = ["video", "catalogo", "beneficios", "asistente", "clientes"].map(id => document.getElementById(id));
+const secs = ["inicio", "catalogo", "beneficios", "asistente", "clientes"].map(id => document.getElementById(id));
 function onScroll() {
   const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
   $("#progress").style.width = (h > 0 ? y / h * 100 : 0) + "%";
