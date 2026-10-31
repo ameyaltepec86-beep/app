@@ -119,7 +119,7 @@ $("#prods").addEventListener("click", e => {
 const CATALOG = [
   { f: "Agua", n: "Jarra Alcaline Max", img: "jarra-alcaline-max", price: 869.70, tag: "Para toda la familia",
     d: "Jarra purificadora con filtro de 5 capas: minerales, carbón activado con plata coloidal, esferas alcalinas, carbón activado y cuarzo. Disco con 10 Ion Balls e imán de 3400 Gauss.",
-    b: ["Agua alcalina con calcio, magnesio y potasio", "Menos cloro y mejor sabor", "Te ayuda a tomar más agua cada día", "Repuesto de 1000 L o 9 meses: unas 2000 botellas de plástico menos"] },
+    b: ["Agua alcalina y con minerales", "Menos cloro y mejor sabor", "Te ayuda a tomar más agua cada día", "Repuesto de 1000 L o 9 meses: unas 2000 botellas de plástico menos"] },
   { f: "Agua", n: "Alcaline Squeeze MAX", img: "alcaline-squeeze-max", price: 362, tag: "Para llevar",
     d: "Botella portátil del sistema Alcaline para el gimnasio, la oficina, la escuela o los viajes.",
     b: ["Agua alcalina a la mano fuera de casa", "Te recuerda hidratarte en jornadas largas", "Ideal después de hacer ejercicio"] },
