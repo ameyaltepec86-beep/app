@@ -132,6 +132,9 @@ const CATALOG = [
   { f: "Cuerpo", n: "Plantillas Blue Insole", img: "plantillas-insole", price: 176, tag: "Más pedido", mag: true,
     d: "18 imanes en puntos estratégicos y tecnología FIR. Se recortan para adaptarse a tu calzado. Tallas chica, mediana y grande.",
     b: ["Confort para quienes trabajan de pie", "Menos sensación de cansancio en pies y piernas al final del día", "Para enfermeras, meseros, maestros, cocineros y caminantes"] },
+  { f: "Cuerpo", n: "Flip Flops FIR para mujer", img: "flip-flops-mujer", price: 192.10, tag: "Color nude", mag: true,
+    d: "Sandalias de PVC micro-expandido con 6 FIR Power y 14 imanes de 500 Gauss. Colores nude (rosado) y negro. Tallas US 3.5 a 9.",
+    b: ["Comodidad para descansar los pies en casa", "Ligeras y fáciles de poner", "Para pasear, la playa o después del trabajo"] },
   { f: "Cuerpo", n: "Rodillera Knee Pad FIR", img: "rodillera-knee-pad", price: 236.90, tag: "Adultos mayores", mag: true,
     d: "Neopreno y espuma especial con compresión térmica, 4 FIR Power y un imán de 1800 Gauss. Tallas chica, mediana y grande. Garantía de 90 días.",
     b: ["Soporte y calor en la rodilla al caminar", "Compresión firme pero cómoda", "Para adultos mayores y deportistas"] },
@@ -174,6 +177,7 @@ const card = (p, i) => html`
 // La línea Alcaline va en su propia sección; el catálogo muestra el resto de E-Energy.
 setHTML($("#aguaCat"), html`${CATALOG.filter(p => p.f === "Agua").map(card)}`);
 setHTML($("#cat"), html`${CATALOG.filter(p => p.f !== "Agua").map(card)}`);
+$("#duoWa").href = wa("¡Hola! 😊 Me interesan la botella Alcaline Squeeze MAX y las Flip Flops FIR color nude. ¿Me das información y precio?");
 $("#aqWa").href = wa("¡Hola! 😊 Me interesa la jarra Alcaline Max de E-Energy para tener agua alcalina en casa. ¿Me das información y el precio?");
 $("#catFil").addEventListener("click", e => {
   const b = e.target.closest("[data-f]"); if (!b) return;
