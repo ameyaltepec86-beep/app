@@ -2,7 +2,7 @@
 
 // ⚙️ CONFIGURACIÓN: escribe tu número de WhatsApp con código de país, sin + ni espacios.
 // Ejemplo México: "5215512345678". Si lo dejas vacío, el botón verde abre WhatsApp para compartir.
-const WHATSAPP = "";
+const WHATSAPP = "17083512246";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -199,6 +199,11 @@ $("#yt").addEventListener("click", e => {
 const bioMsg = "¡Hola! 😊 Vi el video de las plantillas Insole Biohacking de E-Energy y quiero las mías. ¿Me das información y el precio?";
 $("#vWa").href = wa(bioMsg);
 $("#heroWa").href = wa(bioMsg);
+const SITE = "https://comodidad-diaria-n3vw.onrender.com/";
+const shareTxt = "Mira estos productos E-Energy by Nipponflex: plantillas Insole Biohacking, agua alcalina Alcaline Max y más. Pregúntale a Marcelina Galindo al (708) 351-2246 👉 ";
+$("#shWa").href = wa(shareTxt + SITE, "");
+$("#shFb").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE)}`;
+$("#shCp").addEventListener("click", () => copy(SITE));
 $("#finWa").href = wa("¡Hola! 😊 Vi tu página y quiero que me ayudes a elegir un producto E-Energy.");
 
 /* ---------- Mensajes listos ---------- */
