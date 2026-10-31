@@ -236,6 +236,51 @@ label.f{display:flex;flex-direction:column;gap:6px;font-size:.85rem;font-weight:
 .bsplit h3{font-size:clamp(1.4rem,4vw,1.9rem);background:linear-gradient(90deg,#fdba74,#f472b6,#c4b5fd);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}
 .bsplit p{color:#d8cbe6}
 
+.bben{padding-left:0;list-style:none;display:grid;gap:10px;margin:6px 0 14px}
+.bben li{position:relative;padding-left:30px;color:#e9def3;font-size:.95rem}
+.bben li::before{content:"✓";position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:linear-gradient(120deg,#fdba74,#f472b6);color:#fff;font-size:.75rem;font-weight:800;display:grid;place-items:center}
+.bben b{color:#fff}
+.bwho{display:flex;flex-wrap:wrap;gap:6px}
+.bwho span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:99px;padding:4px 10px;font-size:.8rem;font-weight:600}
+
+/* Alcaline Max (agua) */
+.aqua{--aq1:#0ea5e9;--aq2:#2563eb;--aqbg:#eef8ff;--aqcard:#fff;--aqink:#0c2a4a;--aqmuted:#3d5a7a;
+  background:radial-gradient(1200px 500px at 85% -10%,#bae6fd,transparent 60%),radial-gradient(900px 400px at -10% 110%,#c7d2fe,transparent 60%),var(--aqbg);color:var(--aqink)}
+@media (prefers-color-scheme:dark){.aqua{--aqbg:#06192b;--aqcard:#0b2540;--aqink:#e6f4ff;--aqmuted:#9cc3e6;
+  background:radial-gradient(1200px 500px at 85% -10%,#0c4a6e,transparent 60%),radial-gradient(900px 400px at -10% 110%,#1e3a8a,transparent 60%),var(--aqbg)}}
+.aqua .kicker{background:linear-gradient(90deg,var(--aq1),var(--aq2));-webkit-background-clip:text;background-clip:text}
+.aqua .head p{color:var(--aqmuted)}
+.aqhero{display:grid;gap:28px;align-items:center}
+@media (min-width:900px){.aqhero{grid-template-columns:.9fr 1.1fr;gap:48px}}
+.aqimg{position:relative;border-radius:30px;overflow:hidden;box-shadow:0 30px 60px -24px rgba(37,99,235,.55)}
+.aqimg img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
+.aqbadge{position:absolute;top:16px;left:16px;background:#fff;color:#0c2a4a;font-weight:800;font-size:.9rem;padding:8px 14px;border-radius:99px;box-shadow:0 8px 20px -8px rgba(0,0,0,.35)}
+.aqh{font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.15;margin-bottom:8px}
+.aqp{color:var(--aqmuted);font-size:1.02rem}
+.aqchips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.aqchips span{background:var(--aqcard);border:1px solid rgba(14,165,233,.35);border-radius:99px;padding:8px 14px;font-weight:700;font-size:.9rem;box-shadow:0 6px 16px -10px rgba(37,99,235,.5)}
+.aqprice{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,var(--aq1),var(--aq2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.aqprice small{display:block;font-size:.8rem;font-weight:500;color:var(--aqmuted);-webkit-text-fill-color:var(--aqmuted)}
+.aqgrid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.aqc{background:var(--aqcard);border-radius:22px;padding:22px;border:1px solid rgba(14,165,233,.2);box-shadow:0 14px 30px -18px rgba(37,99,235,.45);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.aqc:hover{transform:translateY(-6px)}
+.aqc .ti{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:1.6rem;background:linear-gradient(135deg,#e0f2fe,#dbeafe);margin-bottom:10px}
+.aqc h3{font-size:1.08rem;margin-bottom:4px}
+.aqc p{color:var(--aqmuted);font-size:.93rem}
+.aqfilter{display:grid;gap:28px;align-items:center;background:var(--aqcard);border-radius:28px;padding:18px;border:1px solid rgba(14,165,233,.2);box-shadow:0 20px 40px -24px rgba(37,99,235,.45)}
+@media (min-width:900px){.aqfilter{grid-template-columns:1fr 1fr;padding:28px}}
+.aqfilter img{width:100%;height:auto;border-radius:18px}
+.aqfilter h3{font-size:1.35rem;margin-bottom:10px}
+.layers{list-style:none;padding:0;display:grid;gap:8px;counter-reset:l}
+.layers li{counter-increment:l;display:grid;grid-template-columns:34px 1fr;column-gap:12px;align-items:start}
+.layers li::before{content:counter(l);grid-row:span 2;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--aq1),var(--aq2));color:#fff;font-weight:800;display:grid;place-items:center}
+.layers small{color:var(--aqmuted);font-size:.88rem}
+.routine{display:flex;flex-wrap:wrap;gap:6px}
+.routine span{background:linear-gradient(135deg,#e0f2fe,#dbeafe);color:#0c2a4a;border-radius:99px;padding:6px 12px;font-size:.85rem;font-weight:600}
+.aqnote{margin-top:14px;font-size:.8rem;color:var(--aqmuted)}
+.mt20{margin-top:20px}
+.aqua .prod{border-color:rgba(14,165,233,.25)}
+
 /* Banda zona del distribuidor */
 .band{background:var(--grad);background-size:200% 200%;animation:shift 10s ease infinite;color:#fff;text-align:center;padding:44px 0}
 .band .kicker{background:none;color:#fff;-webkit-text-fill-color:#fff;opacity:.9}

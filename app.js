@@ -119,10 +119,13 @@ $("#prods").addEventListener("click", e => {
 const CATALOG = [
   { f: "Agua", n: "Jarra Alcaline Max", img: "jarra-alcaline-max", price: 869.70, tag: "Para toda la familia",
     d: "Jarra purificadora con filtro de 5 capas: minerales, carbón activado con plata coloidal, esferas alcalinas, carbón activado y cuarzo. Disco con 10 Ion Balls e imán de 3400 Gauss.",
-    b: ["Reduce el cloro y mejora el sabor del agua", "Agua con minerales y pH más alto", "Te ayuda a tomar más agua cada día", "Repuesto de 1000 L o 9 meses: unas 2000 botellas de plástico menos"] },
+    b: ["Agua alcalina con calcio, magnesio y potasio", "Menos cloro y mejor sabor", "Te ayuda a tomar más agua cada día", "Repuesto de 1000 L o 9 meses: unas 2000 botellas de plástico menos"] },
   { f: "Agua", n: "Alcaline Squeeze MAX", img: "alcaline-squeeze-max", price: 362, tag: "Para llevar",
     d: "Botella portátil del sistema Alcaline para el gimnasio, la oficina, la escuela o los viajes.",
-    b: ["Agua a la mano fuera de casa", "Te recuerda hidratarte en jornadas largas", "Ideal después de hacer ejercicio"] },
+    b: ["Agua alcalina a la mano fuera de casa", "Te recuerda hidratarte en jornadas largas", "Ideal después de hacer ejercicio"] },
+  { f: "Agua", n: "Repuesto de filtro Alcaline Max", img: "repuesto-alcaline-max", price: 164.14, tag: "Repuesto original",
+    d: "Filtro original de 5 capas para la jarra Alcaline Max. Rinde 1000 litros o 9 meses, lo que ocurra primero.",
+    b: ["Mantiene tu agua como el primer día", "Cámbialo a tiempo para cuidar el sabor", "Usa siempre repuestos originales"] },
   { f: "Cuerpo", n: "Plantillas Insole Biohacking", img: "insole-biohacking", price: null, tag: "🆕 Nuevo", mag: true, video: true,
     d: "La nueva plantilla de E-Energy: 36 imanes y 10 FIR Power por par, diseño exclusivo con zonas de colores y 3 tamaños ajustables que se recortan a tu medida.",
     b: ["Confort a cada paso, en tenis o zapatos", "Pensadas para sentir menos presión y cansancio al final del día", "Para el gimnasio, el trabajo de pie o la oficina"] },
@@ -155,7 +158,7 @@ const CATALOG = [
     b: ["Soporte firme para tu espalda", "Pensado para descansar toda la noche", "Pregúntame por otras medidas"] }
 ];
 const usd = n => "US$ " + n.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-setHTML($("#cat"), html`${CATALOG.map((p, i) => html`
+const card = (p, i) => html`
   <article class="prod rv d${i % 4}${p.video ? " star" : ""}" data-f="${p.f}">
     <div class="ph"><img src="/img/cat/${p.img}.jpg" alt="${p.n} E-Energy" loading="lazy" decoding="async" width="640" height="640"><span class="tag">${p.tag}</span></div>
     <div class="bd">
@@ -167,7 +170,11 @@ setHTML($("#cat"), html`${CATALOG.map((p, i) => html`
       ${p.video ? html`<a class="btn btn-line btn-sm" href="#inicio">▶ Ver video</a>` : ""}
       <a class="btn btn-wa btn-sm" href="${wa(`¡Hola! 😊 Me interesa ${p.n} de E-Energy. ¿Me das más información y el precio?`)}" target="_blank" rel="noopener">📲 Lo quiero</a>
     </div>
-  </article>`)}`);
+  </article>`;
+// La línea Alcaline va en su propia sección; el catálogo muestra el resto de E-Energy.
+setHTML($("#aguaCat"), html`${CATALOG.filter(p => p.f === "Agua").map(card)}`);
+setHTML($("#cat"), html`${CATALOG.filter(p => p.f !== "Agua").map(card)}`);
+$("#aqWa").href = wa("¡Hola! 😊 Me interesa la jarra Alcaline Max de E-Energy para tener agua alcalina en casa. ¿Me das información y el precio?");
 $("#catFil").addEventListener("click", e => {
   const b = e.target.closest("[data-f]"); if (!b) return;
   $$("#catFil button").forEach(x => x.classList.toggle("on", x === b));
@@ -395,7 +402,7 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 $$(".rv").forEach(el => io.observe(el));
 
 // Encabezado, barra de progreso y menú inferior activo
-const secs = ["inicio", "catalogo", "beneficios", "asistente", "clientes"].map(id => document.getElementById(id));
+const secs = ["inicio", "alcaline", "catalogo", "asistente", "clientes"].map(id => document.getElementById(id));
 function onScroll() {
   const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
   $("#progress").style.width = (h > 0 ? y / h * 100 : 0) + "%";
